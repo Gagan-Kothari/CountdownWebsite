@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title> Count Down </title>
+
+    <style>
+        *{
+            margin:0;
+            padding:0;
+            font-family:Verdana, Geneva, Tahoma, sans-serif;
+            box-sizing: border-box; 
+        }
+
+        html{
+            background-image: url('https://asset.gecdesigns.com/img/wallpapers/starry-night-sky-reflection-background-hd-wallpaper-sr10012425-1705222416280-cover.webp');
+            background-repeat:no-repeat;
+            background-size:cover;
+        }
+        
+        .container{
+            margin-left:20%;
+            margin-right:20%;
+        }
+
+        h1{
+            color:transparent;
+            -webkit-text-stroke: 1px white;
+            font-size:100px;
+            text-align:center;
+        }
+
+        .container{
+            display:flex;
+            justify-content: space-between;
+        }
+
+        span{
+            color:white;
+            font-weight:500;
+            font-size:30px;
+        }
+
+        p span{
+            color:red;
+        }
+
+        p{
+            -webkit-text-stroke: white 1px;
+            font-size:70px;
+            color:transparent;
+
+        }
+
+        .custom-cursor { 
+            position: fixed; 
+            top: 0; 
+            left: 0; 
+            width: 20px; 
+            height: 20px; 
+            background-color: #ffffff; 
+            border-radius: 50%; 
+            mix-blend-mode: difference; /* This is used to create the glowing effect */ 
+            pointer-events: none; /* This allows the cursor to pass through to the elements behind it */ 
+            z-index: 9999; /* Ensure it's above other elements on the page */ 
+            transition: transform 0.2s ease; /* Add a smooth transition for movement */ 
+            box-shadow: 0 0 10px rgba(255, 255, 255, 0.5); /* Create the glowing effect using box-shadow */ 
+        } 
+    </style>
+</head>
+<body >
+    <br> <br> <br>
+    <h1> Count Down </h1>
+    <br>
+    <div class = container>
+        <div>
+            <span> Days</span>
+            <p id="days"> 00 </p>
+        </div>
+        <div>
+            <span>Hours</span>
+            <p id="hours"> 00 </p>
+        </div>
+        <div>
+            <span> Minutes </span>
+            <p id="minutes"> 00 </p>
+        </div>
+        <div>
+            <span>Seconds</span>
+            <p id="seconds"> 00 </p>
+        </div>
+    </div>
+
+    <div class="custom-cursor"></div>
+
+    <script>
+        var finaldate = new Date("May 23, 2024 02:00:00")
+        
+        setInterval(function (){
+            var now = new Date().getTime();
+            var distance = finaldate - now
+
+            var days = Math.floor(distance / (1000 * 60 * 60 * 24));
+            var hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+            var minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+            var seconds = Math.floor((distance % (1000 * 60)) / 1000);
+
+            document.getElementById('days').innerHTML = days
+            document.getElementById('hours').innerHTML = hours
+            document.getElementById('minutes').innerHTML = minutes
+            document.getElementById('seconds').innerHTML = seconds
+
+        }, 1000)
+
+        document.addEventListener('mousemove', (e) => { 
+        const cursor = document.querySelector('.custom-cursor'); 
+        cursor.style.transform = `translate3d(${e.clientX}px, ${e.clientY}px, 0)`; 
+        }); 
+    </script>
+</body>
+</html>
